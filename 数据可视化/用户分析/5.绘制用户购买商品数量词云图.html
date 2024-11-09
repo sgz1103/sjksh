@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--引入ECharts脚本-->
+    <script src="../js/echarts.js"></script>
+    <script src="../js/echarts-wordcloud.js"></script>
+    <script src="../js/vintage.js"></script>  <!-- 引用一个浅黄色背景 -->
+</head>
+
+<body>
+    <!---为ECharts准备一个具备大小（宽高）的DOM-->
+    <div id="main" style="width: 800px; height: 400px"></div>
+    <script type="text/javascript">
+        // 基于准备好的DOM，初始化ECharts图表
+        var myChart = echarts.init(document.getElementById("main"), 'vintage');  // , 'vintage'：设置一个浅黄色背景
+        var data = {
+        		"data": [
+        			{"value":22199,"name":"安慕希"},
+        			{"value":10288,"name":"井水豆腐香辣味"},
+        			{"value":620,"name":"蒙牛纯牛奶"},
+        			{"value":274470,"name":"沙琪玛"},
+        			{"value":12311,"name":"王老吉"},
+        			{"value":1206,"name":"小鱼仔"},
+        			{"value":4885,"name":"优酸乳"},
+        			{"value":32294,"name":"可口可乐"},
+        			{"value":18574,"name":"咖啡"},
+        			{"value":38929,"name":"旺仔牛奶"},
+        			{"value":969,"name":"豆腐干"},
+        			{"value":37517,"name":"燕麦饼干"},
+        			{"value":12053,"name":"QQ糖"},
+        			{"value":57299,"name":"方便面"},
+        			{"value":15418,"name":"碎碎冰"},
+        			{"value":22905,"name":"矿泉水"},
+        			{"value":5146,"name":"怪味豆"}
+        		]
+        }
+        // 指定图表的配置项和数据
+        var option = {
+           	title: {
+           		text: '用户购买商品数量词云图',
+           		left: 'center',
+           		textStyle: {
+           			color: 'green',
+           			fontSize: 22
+           		}
+           	},
+           	tooltip: {  // 提示框组件
+           		
+           	},
+           	series: [
+           		{
+           			name: '用户购买商品数量词云图',
+           			type: 'wordCloud',  // 设置图表类型为词云图
+           			sizeRange: [15, 100],  // 设置数据大小范围
+           			size: ['80%', '80%'],  // 设置显示的词云图的大小
+           			textRotation: [0, 45, 90, 135, -45, -90],  // 设置文字倾斜角度
+           			textPadding: 3,  // 设置文字之间的间距
+           			autoSize: {  // 设置文字的自动大小
+           				enable: true,
+           				minSize: 5
+           			},
+           			textStyle: {
+           				color: function () {
+           					return 'rgb(' + [
+           						Math.round(Math.random() * 160),
+           						Math.round(Math.random() * 160),
+           						Math.round(Math.random() * 160)
+           					].join(',') + ')';
+           				}
+           			},
+           			emphasis: {
+           				shadowBlur: 26,
+           				color: '#333',
+           				shadowColor: '#ccc',
+           				fontSize: 20
+           			},
+	           		data: data.data
+           		}
+           	]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

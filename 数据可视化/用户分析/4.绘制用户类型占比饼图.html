@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--引入ECharts脚本-->
+    <script src="../js/echarts.js"></script>
+    <script src="../js/vintage.js"></script>  <!-- 引用一个浅黄色背景 -->
+</head>
+
+<body>
+    <!---为ECharts准备一个具备大小（宽高）的DOM-->
+    <div id="main" style="width: 800px; height: 400px"></div>
+    <script type="text/javascript">
+        // 基于准备好的DOM，初始化ECharts图表
+        var myChart = echarts.init(document.getElementById("main"), 'vintage');  // , 'vintage'：设置一个浅黄色背景
+        var data = {
+        	"用户类型": ["忠诚用户", "潜力用户", "一般用户", "流失用户"],
+        	"用户人数": ["234", "800", "800", "760"]
+        }
+        // 指定图表的配置项和数据
+        var option = {
+           	title: {
+           		text: '用户类型占比饼图',
+           		lef: '38%',
+           		top: '10%'
+           	},
+           	legend: {  // 图例组件。
+           		left: '72%',
+           		top: '20%',
+           		orient: 'vertical'
+           	},
+           	tooltip: {  // 提示框组件
+           		
+           	},
+           	series: [
+           		{
+           			name: '各类用户占比',
+           			type: 'pie',
+           			// roseType是否展示成南丁格尔图，通过半径区分数据大小。可选择两种模式：
+           			// 'radius' 扇区圆心角展现数据的百分比，半径展现数据的大小。
+           			// 'area' 所有扇区圆心角相同，仅通过半径展现数据大小
+           			roseType: {
+           				
+           			},
+           			radius: ['30', '50%'],  // 饼图的半径.['内半径', '外半径']
+           			center: ['45%', '50%'],  // 饼图的位置.['左右', '上下']
+           			data: [
+           				{
+           					name: data.用户类型[0],
+           					value: data.用户人数[0]
+           				},
+           				{
+           					name: data.用户类型[1],
+           					value: data.用户人数[1]
+           				},
+           				{
+           					name: data.用户类型[2],
+           					value: data.用户人数[2]
+           				},
+           				{
+           					name: data.用户类型[3],
+           					value: data.用户人数[3]
+           				},
+           			],
+           			emphasis: {  // 高亮状态的扇区和标签样式。
+           				itemStyle: {
+           					shadowBlur: 10,  // 图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+           					shadowOffsetX: 0,  // 阴影水平方向上的偏移距离
+           					shadowColor: 'rgba(0, 0, 0, 0.5)'  // 阴影颜色
+           				}
+           			}
+           		}
+           	]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

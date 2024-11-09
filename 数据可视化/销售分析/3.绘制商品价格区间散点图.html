@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--引入ECharts脚本-->
+    <script src="../js/echarts.js"></script>
+    <script src="../js/vintage.js"></script>  <!-- 引用一个浅黄色背景 -->
+</head>
+
+<body>
+    <!---为ECharts准备一个具备大小（宽高）的DOM-->
+    <div id="main" style="width: 1000px; height: 400px"></div>
+    <script type="text/javascript">
+        // 基于准备好的DOM，初始化ECharts图表
+        var myChart = echarts.init(document.getElementById("main"), 'vintage');  // , 'vintage'：设置一个浅黄色背景
+        var data = {
+			"data": [
+					{"value":[6.5 ,8],"name":"安慕希"},
+					{"value":[1.8 ,13],"name":"井水豆腐香辣味"},
+					{"value":[3.5 ,13.5],"name":"蒙牛纯牛奶"},
+					{"value":[2.6 ,9],"name":"沙琪玛"},
+					{"value":[3.8 ,14],"name":"王老吉"},
+					{"value":[1.5 ,22],"name":"小鱼仔"},
+					{"value":[4.5 ,10.5],"name":"优酸乳"},
+					{"value":[5.5 ,18],"name":"咖啡"},
+					{"value":[4.8 ,16],"name":"可口可乐"}
+			]
+        }
+        // 指定图表的配置项和数据
+        var option = {
+           	title: {
+				text: '商品价格区间散点图',
+				left: 'center'
+			},
+			legend: {
+				right: '3%',
+				top: '15%'
+			},
+			tooltip: {  // 提示框组件
+				trigger: 'item',
+				axisPointer: {
+				    type: 'cross'
+				}
+			},
+			grid: {
+				left: '10%',
+				top: '15%',
+				width: '70%',
+				height: '70%'
+			},
+			xAxis: {
+				name: '商品价格（元）'
+			},
+			yAxis: {
+				name: '销售数量（个）'
+			},
+			series: [
+				{
+					name: '商品价格区间散点图',  // 系列名称
+					type: 'scatter',
+					symbolSize: function (data) {  // 设置标记大小
+						return data[1]*2;
+					},
+					symbol: 'circle',
+					data: data.data,
+					emphasis: {  // 高亮的图形和标签样式
+						focus: 'series',
+						label: {
+							formatter: function (param) {
+								return param.data.name;
+							},
+							position: 'top'
+						}
+					},
+					itemStyle: {  // 图形样式
+						shadowBlur: 10,
+						shadowColor: 'rgba(120, 36, 50, 0.5)',
+						shadowOffsetY: 5,
+						color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
+							{
+								offset: 0,
+								color: 'rgba(129, 227, 238, 1)'
+							},
+							{
+								offset: 1,
+								color: 'rgba(25, 183, 207, 1)'
+							}
+						])
+					}
+				}
+			]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

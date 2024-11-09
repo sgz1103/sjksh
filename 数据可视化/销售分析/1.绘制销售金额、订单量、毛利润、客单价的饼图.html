@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--引入ECharts脚本-->
+    <script src="../js/echarts.js"></script>
+    <script src="../js/vintage.js"></script>  <!-- 引用一个浅黄色背景 -->
+</head>
+
+<body>
+    <!---为ECharts准备一个具备大小（宽高）的DOM-->
+    <div id="main" style="width: 1500px; height: 600px"></div>
+    <script type="text/javascript">
+        // 基于准备好的DOM，初始化ECharts图表
+        var myChart = echarts.init(document.getElementById("main"), 'vintage');  // , 'vintage'：设置一个浅黄色背景
+		var data = {
+			"where":["教学楼","食堂","体育馆","田径场","操场"],
+			"sale":[
+				{"value":283122, "name":"教学楼"},
+				{"value":253597, "name":"食堂"},
+				{"value":299874, "name":"体育馆"},
+				{"value":260256, "name":"田径场"},
+				{"value":186585, "name":"操场"}
+			],
+	
+			"order":[
+				{"value":9097, "name":"教学楼"},
+				{"value":5597, "name":"食堂"},
+				{"value":8608, "name":"体育馆"},
+				{"value":7602, "name":"田径场"},
+				{"value":4865, "name":"操场"}
+			],
+					
+			"gross":[
+				{"value":146805, "name":"教学楼"},
+				{"value":104936, "name":"食堂"},
+				{"value":157321, "name":"体育馆"},
+				{"value":160256, "name":"田径场"},
+				{"value":186585, "name":"操场"}
+			],
+	
+			"unit":[
+				{"value":12.07, "name":"教学楼"},
+				{"value":9.13, "name":"食堂"},
+				{"value":11.03, "name":"体育馆"},
+				{"value":14.8, "name":"田径场"},
+				{"value":12.6, "name":"操场"}
+			]
+		}
+		// 指定图表的配置项和数据
+        var option = {
+           	title: [
+				{
+					text: '销售金额、订单量、毛利润、客单价的饼图',
+					left: 'center',
+					top: '2%',
+					textStyle: {
+						fontSize: 30,  // 设置主标题的字体大小
+						color: 'red',
+						fontWeight: 'bold'  // 主标题文字字体的粗细。可选：'normal'/'bold'/'bolder'/'lighter'/100 | 200 | 300 | 400...
+					}
+				},
+				{
+				  	subtext: '销售金额的饼图',
+				  	left: '15%',
+				  	top: '75%',
+				  	textAlign: 'center',
+					subtextStyle: {
+						fontSize: 20,  // 设置副标题的字体大小
+						fontWeight: 'bold'  // 副标题文字字体的粗细。可选：'normal'/'bold'/'bolder'/'lighter'/100 | 200 | 300 | 400...
+					}
+				},
+				{
+				  	subtext: '订单量的饼图',
+				  	left: '36%',
+				  	top: '75%',
+				  	textAlign: 'center',
+					subtextStyle: {
+						fontSize: 20,  // 设置副标题的字体大小
+						fontWeight: 'bold'
+					}
+				},
+				{
+				  	subtext: '毛利润的饼图',
+				  	left: '60%',
+				  	top: '75%',
+				  	textAlign: 'center',
+					subtextStyle: {
+						fontSize: 20,  // 设置副标题的字体大小
+						fontWeight: 'bold'
+					}
+				},
+			  	{
+			    	subtext: '客单价的饼图',
+			    	left: '85%',
+			    	top: '75%',
+			    	textAlign: 'center',
+					subtextStyle: {
+						fontSize: 20,  // 设置副标题的字体大小
+						fontWeight: 'bold'
+					}
+			  	}
+			],
+			legend: {  // 图例组件。
+				left: '93%',
+				top: '6%',
+				orient: 'vertical'
+			},
+			tooltip: {  // 提示框组件
+				
+			},
+			series: [
+				{
+					name: '销售金额的饼图',  // 系列名称
+					type: 'pie',
+					radius: [0, '50%'],
+					//center: ['50%', '50%'],  // 饼图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标。
+					right: '69%',
+					top: 0,
+					bottom: 0,
+					data: data.sale
+				},
+				{
+					name: '订单量的饼图',  // 系列名称
+					type: 'pie',
+					radius: [0, '40%'],
+					right: '26%',
+					top: 0,
+					bottom: 0,
+					data: data.order
+				},
+				{
+					name: '毛利润的饼图',  // 系列名称
+					type: 'pie',
+					radius: [0, '40%'],
+					left: '21%',
+					right: 0,
+					top: 0,
+					bottom: 0,
+					data: data.gross
+				},
+				{
+					name: '客单价的饼图',  // 系列名称
+					type: 'pie',
+					radius: [0, '55%'],
+					left: '71%',
+					top: 0,
+					bottom: 0,
+					data: data.unit
+				}
+			]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

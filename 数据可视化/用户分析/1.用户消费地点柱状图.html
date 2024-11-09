@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--引入ECharts脚本-->
+    <script src="../js/echarts.js"></script>
+    <script src="../js/vintage.js"></script>  <!-- 引用一个浅黄色背景 -->
+</head>
+
+<body>
+    <!---为ECharts准备一个具备大小（宽高）的DOM-->
+    <div id="main" style="width: 800px; height: 400px"></div>
+    <script type="text/javascript">
+        // 基于准备好的DOM，初始化ECharts图表
+        var myChart = echarts.init(document.getElementById("main"), 'vintage');  // , 'vintage'：设置一个浅黄色背景
+        var data = {
+        	"消费地点":["教学楼","食堂","体育馆","田径场","操场"],
+        	"用户人数":[35, 25, 9, 21, 18]
+        }
+        // 指定图表的配置项和数据
+        var option = {
+        	color: [ new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+        		offset: 0,
+        		color: 'rgba(58, 77, 233, 0.8)'
+        	},{
+        		offset: 1,
+        		color: 'rgba(58, 77, 233, 0.3)'
+        	}]) ],
+           	title: {
+           		text: '用户消费地点柱状图',
+           		left: 'center'
+           	},
+           	legend: {
+           		left: 'right'
+           	},
+			tooltip: {  // 提示框组件
+					
+			},
+           	xAxis: {
+           		type: 'category',
+           		data: data.消费地点
+           	},
+           	yAxis: {
+           		type: 'value'
+           	},
+           	series: [
+           		{
+           			name: '用户人数',
+           			type: 'bar',
+           			data: data.用户人数
+           		}
+           	]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

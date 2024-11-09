@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--引入ECharts脚本-->
+    <script src="../js/echarts.js"></script>
+    <script src="../js/vintage.js"></script>  <!-- 引用一个浅黄色背景 -->
+</head>
+
+<body>
+    <!---为ECharts准备一个具备大小（宽高）的DOM-->
+    <div id="main" style="width: 800px; height: 400px"></div>
+    <script type="text/javascript">
+        // 基于准备好的DOM，初始化ECharts图表
+        var myChart = echarts.init(document.getElementById("main"), 'vintage');  // , 'vintage'：设置一个浅黄色背景
+        var data = {
+        	"类型":["新增人数","流失人数"],
+        	"日期":["9月1日","9月2日","9月3日","9月4日","9月5日"],
+        	"新增人数":[5, 25, 20, 22, 12],
+        	"流失人数":[3, 11, 13, 4, 8]
+        }
+        // 指定图表的配置项和数据
+        var option = {
+           	title: {
+           		text: '近5天用户增长和流失折线图',
+           		left: 'center'
+           	},
+           	legend: {
+           		left: 'right',
+           		top: '20%',
+           		orient: 'vertical',  // 图例列表的布局朝向.当组件的 left 值为 'right' 以及纵向布局（orient 为 'vertical'）的时候为右对齐，即为 'right'
+           		itemGap: 25  // 图例每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
+           	},
+           	tooltip: {  // 提示框组件
+           		
+           	},
+           	xAxis: {
+           		name: '日期',
+           		data: data.日期
+           	},
+           	yAxis: {
+           		show: true,
+           		name: '人数',
+           		axisLine: {
+           			show: true  // 是否显示坐标轴轴线。
+           		}
+           	},
+           	series: [
+           		{
+           			name: '新增人数',
+	           		type: 'line',
+	           		data: data.新增人数
+           		},
+           		{
+           			name: '流失人数',
+	           		type: 'line',
+	           		data: data.流失人数
+           		}
+           	]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
